@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.josunhotel.monitoring.mapper.MonitoringMapper">
+    <select id="getTableSpaceUsage" resultType="com.josunhotel.monitoring.vo.TableSpaceDto">
+        SELECT
+        t.tablespace_name AS table_space,
+        round((s.us / d.maxbytes )* 100, 3) AS used
+        FROM
+        dba_tablespaces t,
+        (
+        SELECT
+        tablespace_name,
+        sum(ma) maxbytes
+        FROM
+        (
+        SELECT
+        tablespace_name,
+        sum(bytes) ma
+        FROM
+        dba_data_files
+        WHERE
+        maxbytes = 0
+        GROUP BY
+        tablespace_name
+        UNION ALL
+        SELECT
+        tablespace_name,
+        sum(bytes) ma
+        FROM
+        dba_data_files
+        WHERE
+        maxbytes <![CDATA[<>]]> 0
+        GROUP BY
+        tablespace_name)
+        GROUP BY
+        tablespace_name) d,
+        (
+        SELECT
+        tablespace_name,
+        sum(bytes) us
+        FROM
+        dba_segments
+        GROUP BY
+        tablespace_name) s
+        WHERE
+        t.tablespace_name = d.tablespace_name(+)
+        AND t.tablespace_name = s.tablespace_name(+)
+        AND t.tablespace_name NOT LIKE 'UNDO%'
+        AND (s.us / d.maxbytes) <![CDATA[<>]]> 0
+        ORDER BY
+        round((s.us / d.maxbytes)* 100, 3) DESC
+    </select>
+</mapper>
