@@ -1,11 +1,11 @@
-#server:
-#  port: 12345
+server:
+  port: 12345
 
 spring:
   config:
     import: application-db.yml
-
 # mybatis 관련 설정
+
 mybatis:
   # resources/mapper/ 에 있는 모든 xml 파일
   mapper-locations: classpath:mapper/*.xml
@@ -14,3 +14,11 @@ mybatis:
 logging:
   level:
     root: info
+
+management:
+  health:
+    diskspace:
+      enabled: false
+  endpoint:
+    health:
+      show-details: never
