@@ -12,4 +12,6 @@ import lombok.ToString;
 public class TableSpaceDto {
     private String tableSpace;
     private double used;
+
+
 }

@@ -108,8 +108,6 @@ public class MonitoringService {
 
         // HttpURLConnection 생성 및 설정
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-        log.info(">>>>> {}의 서버 상태를 요청합니다. <<<<<", server);
         connection.setRequestMethod("GET");
 
         // 응답 상태 코드 확인
@@ -118,8 +116,6 @@ public class MonitoringService {
             log.error(">>>> {}에 API 요청 중 문제가 발생했습니다. <<<<<", server);
             throw new RuntimeException("Failed to connect to the server: " + responseCode);
         }
-
-        log.info(">>>> {}의 서버 상태 요청 완료 <<<<<", server);
 
         // 응답 읽기
         BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));

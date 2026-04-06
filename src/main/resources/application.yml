@@ -14,3 +14,11 @@ mybatis:
 logging:
   level:
     root: info
+
+management:
+  health:
+    diskspace:
+      enabled: false
+  endpoint:
+    health:
+      show-details: never
