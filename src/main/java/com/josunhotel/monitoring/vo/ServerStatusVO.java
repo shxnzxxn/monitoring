@@ -48,4 +48,16 @@ public class ServerStatusVO {
 //                            hardDiskVO.getName().contains("C:") || hardDiskVO.getName().contains("D:")))
 //                .toList();
 //    }
+
+
+    @Override
+    public String toString() {
+        return "ServerStatusVO{" +
+                "serverName='" + serverName + '\'' +
+                ", maxCpuUsage=" + maxCpuUsage +
+                ", memoryUsage=" + memoryUsage +
+                ", rebootDate=" + rebootDate +
+                ", hardDiskUsageList=" + hardDiskUsageList +
+                '}';
+    }
 }

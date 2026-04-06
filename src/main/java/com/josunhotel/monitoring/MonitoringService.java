@@ -58,6 +58,10 @@ public class MonitoringService {
         // 스레드 풀 종료
         executor.shutdown();
 
+        for (TableSpacesVO tableSpacesVO : res) {
+            log.info(">>>>> {} <<<<<", tableSpacesVO.toString());
+        }
+
         return res;
     }
 
@@ -90,6 +94,10 @@ public class MonitoringService {
 
         // 스레드 풀 종료
         executor.shutdown();
+
+        for (ServerStatusVO serverStatusVO : res) {
+            log.info(">>>>> {} <<<<<", serverStatusVO.toString());
+        }
 
 
         return res;

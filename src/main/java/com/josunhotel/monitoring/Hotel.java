@@ -5,6 +5,7 @@ import lombok.Getter;
 @Getter
 public enum Hotel {
     WJS("wjs"),
+    WJS_TRAINING("wjs-training"),
     WJB("wjb"),
     JPG("jpg"),
     GVP("gvp"),

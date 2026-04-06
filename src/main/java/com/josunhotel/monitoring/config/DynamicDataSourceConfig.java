@@ -20,6 +20,13 @@ public class DynamicDataSourceConfig {
                 .build();
     }
 
+    @Bean
+    @ConfigurationProperties(prefix = "spring.datasource.wjs-training")
+    public DataSource oracleWjsTrainingDataSource() {
+        return DataSourceBuilder.create()
+                .build();
+    }
+
     // Oracle WJB 데이터소스 설정
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource.wjb")
@@ -76,19 +83,30 @@ public class DynamicDataSourceConfig {
                 .build();
     }
 
+    // Oracle LES 데이터소스 설정
+    @Bean
+    @ConfigurationProperties(prefix = "spring.datasource.les")
+    public DataSource oracleLesDataSource() {
+        return DataSourceBuilder.create()
+                .build();
+    }
+
     // DynamicDataSource 설정
     @Bean
     public DynamicDataSource dynamicDataSource(DataSource oracleWjsDataSource,
+                                               DataSource oracleWjsTrainingDataSource,
                                                DataSource oracleWjbDataSource,
                                                DataSource oracleJpgDataSource,
                                                DataSource oracleGvpDataSource,
                                                DataSource oracleFpsDataSource,
                                                DataSource oracleFpmDataSource,
                                                DataSource oracleGjbDataSource,
-                                               DataSource oracleGjjDataSource) {
+                                               DataSource oracleGjjDataSource,
+                                               DataSource oracleLesDataSource) {
         // 데이터소스를 Map으로 설정
         Map<Object, Object> targetDataSources = new HashMap<>();
         targetDataSources.put("wjs", oracleWjsDataSource);  // 기본 데이터소스로 설정
+        targetDataSources.put("wjs-training", oracleWjsTrainingDataSource);
         targetDataSources.put("wjb", oracleWjbDataSource);
         targetDataSources.put("jpg", oracleJpgDataSource);
         targetDataSources.put("gvp", oracleGvpDataSource);
@@ -96,6 +114,7 @@ public class DynamicDataSourceConfig {
         targetDataSources.put("fpm", oracleFpmDataSource);
         targetDataSources.put("gjb", oracleGjbDataSource);
         targetDataSources.put("gjj", oracleGjjDataSource);
+        targetDataSources.put("les", oracleLesDataSource);
 
         // DynamicDataSource 설정
         DynamicDataSource dynamicDataSource = new DynamicDataSource();
