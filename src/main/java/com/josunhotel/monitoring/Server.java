@@ -38,7 +38,7 @@ public enum Server {
 
     GVP_APP("172.30.89.10", Hotel.GVP, true, "D:"),
     GVP_BK("172.30.89.26", Hotel.GVP, false, "D:"),
-    GVP_OWS("172.30.89.23", Hotel.GVP, false, "D:"),
+    GVP_OWS("172.30.89.23", Hotel.GVP, false, "C:"),
     GVP_IFC("172.30.89.12", Hotel.GVP, false, "C:"),
 
     GJB_APP_A("172.30.81.11", Hotel.GJB, false, "D:"),
